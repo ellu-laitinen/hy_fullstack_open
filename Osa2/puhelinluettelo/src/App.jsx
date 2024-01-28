@@ -70,10 +70,9 @@ const App = () => {
           }, 5000)
         })
           .catch(error => {
+            console.log(error.response.data)
             setStyle("error")
-            setMessage(
-              `${newName} was already deleted from server`
-            )
+            setMessage(error.response.data.error)
             setTimeout(() => {
               setStyle(null)
               setMessage(null)
@@ -92,6 +91,14 @@ const App = () => {
       setPersons(persons.concat(returnedPerson))
       setNewName('')
       setNewNumber('') 
+    }).catch(error => {
+      console.log(error.response.data)
+      setStyle("error")
+      setMessage(error.response.data.error)
+      setTimeout(() => {
+        setMessage(null)
+        setStyle(null)
+      }, 5000)
     })   
     setStyle("confirmation")
     setMessage(`Added ${newName}`)
