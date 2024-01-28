@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Form from './components/Form'
 import Persons from './components/Persons'
 import Filter from './components/Filter'
@@ -114,7 +113,7 @@ const App = () => {
     if (window.confirm(`remove ${name}?`)) {
         personService
       .remove(id)
-      .then(returnedPerson => {
+      .then(() => {
         setPersons(persons.filter(p => p.id !== id))
         setStyle("confirmation")
         setMessage(`Removed ${name} from phonebook`)
@@ -123,7 +122,7 @@ const App = () => {
         setStyle(null)
       }, 5000)
     })
-    .catch(error => {
+    .catch(() => {
       setStyle("error")
       setMessage(
         ` ${name} was already deleted from server`
